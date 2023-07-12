@@ -10,7 +10,6 @@ public class Locators2 {
     public static void main(String[] args) throws InterruptedException {
         String name = "rahul";
         WebDriver driver = new ChromeDriver();
-        // WebDriver driver = new EdgeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         String password = getPassword(driver);
         driver.get("https://rahulshettyacademy.com/locatorspractice/");
@@ -19,10 +18,7 @@ public class Locators2 {
         driver.findElement(By.className("signInBtn")).click();
         Thread.sleep(2000);
         System.out.println(driver.findElement(By.tagName("p")).getText());
-		Assert.assertEquals(driver.findElement(By.tagName("p")).getText(), "You are successfully logged in.");
-//
-//		Assert.assertEquals(driver.findElement(By.cssSelector("div[class='login-container'] h2")).getText(),
-//				"Hello " + name + ",");
+        Assert.assertEquals(driver.findElement(By.tagName("p")).getText(), "You are successfully logged in.");
         driver.findElement(By.xpath("//*[text()='Log Out']")).click();
         driver.close();
     }
@@ -33,15 +29,8 @@ public class Locators2 {
         Thread.sleep(1000);
         driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
         String passwordText = driver.findElement(By.cssSelector("form p")).getText();
-        //Please use temporary password 'rahulshettyacademy' to Login.
         String[] passwordArray = passwordText.split("'");
-        // String[] passwordArray2 = passwordArray[1].split("'");
-        // passwordArray2[0]
         String password = passwordArray[1].split("'")[0];
         return password;
-        //0th index - Please use temporary password
-        //11t index - rahulshettyacademy' to Login.
-        //0th index - rahulshettyacademy
-        //1st index - to Login.
     }
 }

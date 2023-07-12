@@ -2,6 +2,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import java.time.Duration;
 
 public class SeleniumDemo {
 
@@ -9,13 +12,11 @@ public class SeleniumDemo {
 
     public static void main(String[] args) {
         System.setProperty("webdriver.http.factory", "jdk-http-client");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         openPage();
         clickHomeLoginButton();
         loginPageCreds();
-//        WebElement contactsButton = driver.findElement(By.xpath("//*[@id=\"main-nav\"]/div[3]/a"));
-//        contactsButton.click();
-//        addContacts();
-        driver.close();
+        addContacts();
     }
 
     static void openPage() {
@@ -40,8 +41,10 @@ public class SeleniumDemo {
     }
 
     static void addContacts() {
-
-        WebElement addContact = driver.findElement(By.xpath("//*[@id=\"dashboard-toolbar\"]/div[2]/div/a"));
+        WebElement contactsButton = driver.findElement(By.cssSelector(".users.icon"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(contactsButton);
+        WebElement addContact = driver.findElement(By.xpath("//*[@id=\"main-nav\"]/div[3]/button"));
         addContact.click();
     }
 
